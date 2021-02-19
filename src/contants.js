@@ -1,0 +1,15 @@
+export const OPERAND_LENGTH_LIMIT = 3;
+export const OPERAND_LENGTH_EXCEEDED_LIMIT = `숫자는 ${OPERAND_LENGTH_LIMIT}자리까지만 입력이 가능합니다.`;
+export const OPERATOR_EXISTANCE_ERROR = '연산자가 이미 존재합니다.';
+export const SHOULD_INPUT_LEFT_OPERAND = '숫자를 먼저 입력해주세요.';
+export const INFINITE = 'INFINITE';
+export const INVALID_EXPRESSION = '유효한 식이 아닙니다.';
+
+export default {
+  OPERAND_LENGTH_LIMIT,
+  OPERAND_LENGTH_EXCEEDED_LIMIT,
+  OPERATOR_EXISTANCE_ERROR,
+  SHOULD_INPUT_LEFT_OPERAND,
+  INVALID_EXPRESSION,
+  INFINITE,
+};
