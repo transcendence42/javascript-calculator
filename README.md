@@ -2,7 +2,7 @@
   <img width="100px;" src="https://github.com/woowacourse/javascript-calculator/blob/main/src/images/calculator.png?raw=true"/>
 </p>
 <h2 align="middle">level1 - 자바스크립트 계산기</h2>
-<p align="middle">자바스크립트 계산기로 익혀보는 Cypress</p>
+<p align="middle">자바스크립트 계산기로 익혀보는 프론트엔드 테스트</p>
 <p align="middle">
 <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="template version"/>
 <img src="https://img.shields.io/badge/language-html-blue.svg?style=flat-square"/>
