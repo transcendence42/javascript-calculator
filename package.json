@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "cypress": "^7.4.0",
+    "eslint": "^7.27.0"
+  },
+  "scripts": {
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "cypress:run": "./node_modules/.bin/cypress run",
+    "tsc": "tsc",
+    "lint": "eslint ."
+  } 
+}
