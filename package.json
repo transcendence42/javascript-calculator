@@ -1,0 +1,25 @@
+{
+  "name": "javascript-calculator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jwon42/javascript-calculator.git",
+  "author": "jwon42 <jwon@student.42seoul.kr>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "cypress": "^7.4.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.0"
+  },
+  "scripts": {
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "cypress:run": "./node_modules/.bin/cypress run",
+    "tsc": "tsc",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "typescript": "^4.3.2"
+  }
+}
