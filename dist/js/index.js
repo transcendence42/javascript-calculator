@@ -8,34 +8,48 @@ const calculateOperator = (total, operator, num) => {
         result = total % num;
     if (operator === '-')
         result = total - num;
-    if (operator === '*')
+    if (operator === 'X')
         result = total * num;
     return result;
 };
+const checkValidInput = (total) => {
+    const result = total.match(new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)?(\\-?[\\d]{1,3})?'));
+    if (result[2] === undefined) {
+        if (result[1] === undefined) {
+            return '';
+        }
+        return result[1];
+    }
+    if (result[3] === undefined) {
+        return result[1] + result[2];
+    }
+    return result[1] + result[2] + result[3];
+};
 const calculateResult = (total) => {
-    const result = total.match(new RegExp('(\\??[\\d])(X|\\-|\\+|\\/|\\=)([\\d])'));
+    const result = total.match(new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)(\\-?[\\d]{1,3})'));
+    console.log(result);
     return calculateOperator(Number(result[1]), result[2], Number(result[3]));
 };
 const digitClickEvent = (e) => {
     const eventTarget = e.target;
     const totalTarget = document.getElementById('total');
-    if (totalTarget.innerText.length === 3) {
-        return;
-    }
     if (Number(totalTarget.innerText) === 0) {
         document.getElementById('total').innerText = eventTarget.innerText;
     }
     else {
-        document.getElementById('total').innerText += eventTarget.innerText;
+        const result = checkValidInput(document.getElementById('total').innerText + eventTarget.innerText);
+        if (result === '') {
+            return;
+        }
+        ;
+        document.getElementById('total').innerText = result;
     }
 };
 const operatorEvent = (e) => {
     const eventTarget = e.target;
     const totalTarget = document.getElementById('total');
-    if (totalTarget.innerText.length === 3) {
-        if (eventTarget.innerText === '=') {
-            document.getElementById('total').innerText = String(calculateResult(document.getElementById('total').innerText));
-        }
+    if (eventTarget.innerText === '=') {
+        document.getElementById('total').innerText = String(calculateResult(document.getElementById('total').innerText));
         return;
     }
     if (Number(totalTarget.innerText) === 0) {
