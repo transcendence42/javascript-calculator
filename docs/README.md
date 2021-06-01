@@ -1,6 +1,16 @@
-- [ ] cypress examples 둘러보기.
+## 기본 환경 세팅
+- [x] gitignore
+- [x] prettier
+- [x] eslint
+- [x] typescript
+- [x] cypress
+ - [x] tsconfig
+ - [x] cypress.json
+- [x] package.json
 
 ## test case (BDD: Given, When, Then 구조를 정하자)
+
+- [x] cypress examples 둘러보기.
 
 **Given : 시나리오 진행에 필요한 값을 설정한다.**
 **When : 시나리오를 진행하는데 필요한 조건을 명시한다.**
