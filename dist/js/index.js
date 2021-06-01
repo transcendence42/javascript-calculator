@@ -1,4 +1,16 @@
+const digitClickEvent = (e) => {
+    const eventTarget = e.target;
+    const totalTarget = document.getElementById('total');
+    if (Number(totalTarget.innerText) === 0) {
+        document.getElementById('total').innerText = eventTarget.innerText;
+    }
+    else {
+        document.getElementById('total').innerText += eventTarget.innerText;
+    }
+};
 export default function App() {
-    console.log(document.getElementsByClassName('digits'));
+    document.getElementsByClassName('digits')[0].addEventListener('click', e => {
+        digitClickEvent(e);
+    });
 }
 App();
