@@ -54,11 +54,26 @@ const digitClickEvent = (e: Event): void => {
   }
 };
 
+const getCountOperationdataSet = (): string => {
+  const operations = document.getElementsByClassName(
+    'operations'
+  )[0]! as HTMLElement;
+  return operations.dataset['count'] ? operations.dataset['count'] : '';
+};
+
+const setCountOperationdataSet = (count: string): void => {
+  const operations = document.getElementsByClassName(
+    'operations'
+  )[0]! as HTMLElement;
+  operations.dataset['count'] = count;
+};
+
 const operatorEvent = (e: Event): void => {
   const eventTarget: HTMLElement = e.target as HTMLElement;
   const totalTarget: HTMLElement | null = document.getElementById('total');
 
   if (eventTarget.innerText === '=') {
+    setCountOperationdataSet('0');
     document.getElementById('total')!.innerText = String(
       Math.floor(calculateResult(document.getElementById('total')!.innerText))
     );
@@ -67,7 +82,15 @@ const operatorEvent = (e: Event): void => {
 
   if (Number(totalTarget!.innerText) === 0) {
     return;
-  } else if (!['/', '-', 'X', '+'].includes(totalTarget!.innerText[totalTarget!.innerText.length - 1])) {  
+  } else if (
+    !['/', '-', 'X', '+'].includes(
+      totalTarget!.innerText[totalTarget!.innerText.length - 1]
+    )
+  ) {
+    if (getCountOperationdataSet() === '1') {
+      return;
+    }
+    setCountOperationdataSet('1');
     document.getElementById('total')!.innerText += eventTarget.innerText;
   }
 };
@@ -77,6 +100,7 @@ const ACEvent = (): void => {
 };
 
 export default function App(): void {
+  setCountOperationdataSet('0');
   document.getElementsByClassName('digits')[0].addEventListener('click', e => {
     digitClickEvent(e);
   });

@@ -44,10 +44,19 @@ const digitClickEvent = (e) => {
         document.getElementById('total').innerText = result;
     }
 };
+const getCountOperationdataSet = () => {
+    const operations = document.getElementsByClassName('operations')[0];
+    return operations.dataset['count'] ? operations.dataset['count'] : '';
+};
+const setCountOperationdataSet = (count) => {
+    const operations = document.getElementsByClassName('operations')[0];
+    operations.dataset['count'] = count;
+};
 const operatorEvent = (e) => {
     const eventTarget = e.target;
     const totalTarget = document.getElementById('total');
     if (eventTarget.innerText === '=') {
+        setCountOperationdataSet('0');
         document.getElementById('total').innerText = String(Math.floor(calculateResult(document.getElementById('total').innerText)));
         return;
     }
@@ -55,6 +64,10 @@ const operatorEvent = (e) => {
         return;
     }
     else if (!['/', '-', 'X', '+'].includes(totalTarget.innerText[totalTarget.innerText.length - 1])) {
+        if (getCountOperationdataSet() === '1') {
+            return;
+        }
+        setCountOperationdataSet('1');
         document.getElementById('total').innerText += eventTarget.innerText;
     }
 };
@@ -62,6 +75,7 @@ const ACEvent = () => {
     document.getElementById('total').innerText = '0';
 };
 export default function App() {
+    setCountOperationdataSet('0');
     document.getElementsByClassName('digits')[0].addEventListener('click', e => {
         digitClickEvent(e);
     });

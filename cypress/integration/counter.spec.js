@@ -166,3 +166,27 @@ describe('operator가 연속으로 나왔을때 한개만 적용되도록 처리
     cy.get('#total').should('have.text', '0');
   });
 });
+
+describe('operator가 2번이상 나왔을때 한개만 적용되도록 처리', () => {
+  beforeEach(() => {
+    cy.visit('/javascript-calculator/');
+  });
+  it('button 1 + 3 + =', () => {
+    cy.get('.digit')
+      .contains('4')
+      .click();
+    cy.get('.operations')
+      .contains('+')
+      .click();
+    cy.get('.digit')
+      .contains('2')
+      .click();
+    cy.get('.operations')
+      .contains('+')
+      .click();
+    cy.get('.operations')
+      .contains('=')
+      .click();
+    cy.get('#total').should('have.text', '6');
+  });
+});
