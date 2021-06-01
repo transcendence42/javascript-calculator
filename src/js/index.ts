@@ -58,7 +58,7 @@ const operatorEvent = (e: Event): void => {
 
   if (eventTarget.innerText === '=') {
     document.getElementById('total')!.innerText = String(
-      calculateResult(document.getElementById('total')!.innerText)
+      Math.floor(calculateResult(document.getElementById('total')!.innerText))
     );
     return;
   }

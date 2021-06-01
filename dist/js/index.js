@@ -49,7 +49,7 @@ const operatorEvent = (e) => {
     const eventTarget = e.target;
     const totalTarget = document.getElementById('total');
     if (eventTarget.innerText === '=') {
-        document.getElementById('total').innerText = String(calculateResult(document.getElementById('total').innerText));
+        document.getElementById('total').innerText = String(Math.floor(calculateResult(document.getElementById('total').innerText)));
         return;
     }
     if (Number(totalTarget.innerText) === 0) {
