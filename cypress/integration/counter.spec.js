@@ -1,8 +1,18 @@
+const testInputClickEvent = (first, result) => {
+  for (let item of first) {
+    cy.get('.digit')
+      .contains(item)
+      .click();
+  }
+  cy.get('#total').should('have.text', result);
+};
+
+const testTwoInputCalculateEvent = (first, oper, second, result) => {};
+
 describe('initial value', () => {
   beforeEach(() => {
     cy.visit('/javascript-calculator/');
   });
-
   it('total value', () => {
     cy.get('#total').should('have.text', '0');
   });
@@ -13,64 +23,34 @@ describe('Render digit when button clicked', () => {
     cy.visit('/javascript-calculator/');
   });
   it('button 0', () => {
-    cy.get('.digit')
-      .contains(0)
-      .click();
-    cy.get('#total').should('have.text', '0');
+    testInputClickEvent([0], '0');
   });
   it('button 1', () => {
-    cy.get('.digit')
-      .contains(1)
-      .click();
-    cy.get('#total').should('have.text', '1');
+    testInputClickEvent([1], '1');
   });
   it('button 2', () => {
-    cy.get('.digit')
-      .contains(2)
-      .click();
-    cy.get('#total').should('have.text', '2');
+    testInputClickEvent([2], '2');
   });
   it('button 3', () => {
-    cy.get('.digit')
-      .contains(3)
-      .click();
-    cy.get('#total').should('have.text', '3');
+    testInputClickEvent([3], '3');
   });
   it('button 4', () => {
-    cy.get('.digit')
-      .contains(4)
-      .click();
-    cy.get('#total').should('have.text', '4');
+    testInputClickEvent([4], '4');
   });
   it('button 5', () => {
-    cy.get('.digit')
-      .contains(5)
-      .click();
-    cy.get('#total').should('have.text', '5');
+    testInputClickEvent([5], '5');
   });
   it('button 6', () => {
-    cy.get('.digit')
-      .contains(6)
-      .click();
-    cy.get('#total').should('have.text', '6');
+    testInputClickEvent([6], '6');
   });
   it('button 7', () => {
-    cy.get('.digit')
-      .contains(7)
-      .click();
-    cy.get('#total').should('have.text', '7');
+    testInputClickEvent([7], '7');
   });
   it('button 8', () => {
-    cy.get('.digit')
-      .contains(8)
-      .click();
-    cy.get('#total').should('have.text', '8');
+    testInputClickEvent([8], '8');
   });
   it('button 9', () => {
-    cy.get('.digit')
-      .contains(9)
-      .click();
-    cy.get('#total').should('have.text', '9');
+    testInputClickEvent([9], '9');
   });
 });
 
@@ -79,78 +59,18 @@ describe('Max input length 3', () => {
     cy.visit('/javascript-calculator/');
   });
   it('button 1 2', () => {
-    cy.get('.digit')
-      .contains(1)
-      .click();
-    cy.get('.digit')
-      .contains(2)
-      .click();
-    cy.get('#total').should('have.text', '12');
+    testInputClickEvent([1, 2], '12');
   });
   it('button 4 2', () => {
-    cy.get('.digit')
-      .contains(4)
-      .click();
-    cy.get('.digit')
-      .contains(2)
-      .click();
-    cy.get('#total').should('have.text', '42');
+    testInputClickEvent([4, 2], '42');
   });
   it('button 0 2', () => {
-    cy.get('.digit')
-      .contains(0)
-      .click();
-    cy.get('.digit')
-      .contains(2)
-      .click();
-    cy.get('#total').should('have.text', '2');
+    testInputClickEvent([0, 2], '2');
   });
   it('button 1 2 3', () => {
-    cy.get('.digit')
-      .contains(1)
-      .click();
-    cy.get('.digit')
-      .contains(2)
-      .click();
-    cy.get('.digit')
-      .contains(3)
-      .click();
-    cy.get('#total').should('have.text', '123');
+    testInputClickEvent([1, 2, 3], '123');
   });
   it('button 1 2 3 4', () => {
-    cy.get('.digit')
-      .contains(1)
-      .click();
-    cy.get('.digit')
-      .contains(2)
-      .click();
-    cy.get('.digit')
-      .contains(3)
-      .click();
-    cy.get('.digit')
-      .contains(4)
-      .click();
-    cy.get('#total').should('have.text', '123');
+    testInputClickEvent([1, 2, 3], '123');
   });
 });
-
-// describe("Render digit when calculate +", () => {
-//   beforeEach(() => {
-//     cy.visit("/javascript-calculator/");
-//   });
-//   it("button 0", () => {
-//     cy.get(".digit")
-//       .contains(1)
-//       .click();
-//     cy.get(".operation")
-//       .contains("+")
-//       .click();
-//     cy.get(".digit")
-//       .contains(2)
-//       .click();
-//     cy.get(".operation")
-//       .contains("=")
-//       .click();
-//     cy.get("#total").should("have.text", "2");
-//   });
-// });
