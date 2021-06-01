@@ -1,6 +1,9 @@
 const digitClickEvent = (e) => {
     const eventTarget = e.target;
     const totalTarget = document.getElementById('total');
+    if (totalTarget.innerText.length === 3) {
+        return;
+    }
     if (Number(totalTarget.innerText) === 0) {
         document.getElementById('total').innerText = eventTarget.innerText;
     }
