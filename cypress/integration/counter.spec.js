@@ -123,3 +123,19 @@ describe('계산 결과를 표현할 때 소수점 이하는 버림한다.', () 
     testTwoInputCalculateEvent([5], '/', [2], '2');
   });
 });
+
+describe('AC(All Clear) 버튼을 누를때 total을 0으로 변경한다.', () => {
+  beforeEach(() => {
+    cy.visit('/javascript-calculator/');
+  });
+  it('button 1 / 3', () => {
+    testTwoInputCalculateEvent([5], '/', [2], '2');
+    cy.get('.modifier').click();
+    cy.get('#total').should('have.text', '0');
+  });
+  it('button 1234567 + 1234567', () => {
+    testTwoInputCalculateEvent([1,2,3,4], '+', [1,2,3,4], '246');
+    cy.get('.modifier').click();
+    cy.get('#total').should('have.text', '0');
+  });
+});

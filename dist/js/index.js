@@ -41,7 +41,6 @@ const digitClickEvent = (e) => {
         if (result === '') {
             return;
         }
-        ;
         document.getElementById('total').innerText = result;
     }
 };
@@ -59,6 +58,9 @@ const operatorEvent = (e) => {
         document.getElementById('total').innerText += eventTarget.innerText;
     }
 };
+const ACEvent = () => {
+    document.getElementById('total').innerText = '0';
+};
 export default function App() {
     document.getElementsByClassName('digits')[0].addEventListener('click', e => {
         digitClickEvent(e);
@@ -67,6 +69,11 @@ export default function App() {
         .getElementsByClassName('operations')[0]
         .addEventListener('click', e => {
         operatorEvent(e);
+    });
+    document
+        .getElementsByClassName('modifier')[0]
+        .addEventListener('click', () => {
+        ACEvent();
     });
 }
 App();

@@ -18,13 +18,13 @@ const checkValidInput = (total: string): string => {
     new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)?(\\-?[\\d]{1,3})?')
   );
   if (result[2] === undefined) {
-      if (result [1] === undefined) {
-          return '';
-      }
-      return result[1];
+    if (result[1] === undefined) {
+      return '';
+    }
+    return result[1];
   }
   if (result[3] === undefined) {
-      return result[1] + result[2];
+    return result[1] + result[2];
   }
   return result[1] + result[2] + result[3];
 };
@@ -44,10 +44,12 @@ const digitClickEvent = (e: Event): void => {
   if (Number(totalTarget!.innerText) === 0) {
     document.getElementById('total')!.innerText = eventTarget.innerText;
   } else {
-    const result = checkValidInput(document.getElementById('total')!.innerText + eventTarget.innerText);
+    const result = checkValidInput(
+      document.getElementById('total')!.innerText + eventTarget.innerText
+    );
     if (result === '') {
-        return ;
-    };
+      return;
+    }
     document.getElementById('total')!.innerText = result;
   }
 };
@@ -70,6 +72,10 @@ const operatorEvent = (e: Event): void => {
   }
 };
 
+const ACEvent = (): void => {
+  document.getElementById('total')!.innerText = '0';
+};
+
 export default function App(): void {
   document.getElementsByClassName('digits')[0].addEventListener('click', e => {
     digitClickEvent(e);
@@ -78,6 +84,11 @@ export default function App(): void {
     .getElementsByClassName('operations')[0]
     .addEventListener('click', e => {
       operatorEvent(e);
+    });
+  document
+    .getElementsByClassName('modifier')[0]
+    .addEventListener('click', () => {
+      ACEvent();
     });
 }
 
