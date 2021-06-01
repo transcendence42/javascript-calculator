@@ -1,3 +1,5 @@
+import { getCountOperationdataSet, setCountOperationdataSet } from './operation-data-set.js';
+import { checkValidInput } from './check.js';
 const calculateOperator = (total, operator, num) => {
     let result = 0;
     if (operator === '+')
@@ -11,19 +13,6 @@ const calculateOperator = (total, operator, num) => {
     if (operator === 'X')
         result = total * num;
     return result;
-};
-const checkValidInput = (total) => {
-    const result = total.match(new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)?(\\-?[\\d]{1,3})?'));
-    if (result[2] === undefined) {
-        if (result[1] === undefined) {
-            return '';
-        }
-        return result[1];
-    }
-    if (result[3] === undefined) {
-        return result[1] + result[2];
-    }
-    return result[1] + result[2] + result[3];
 };
 const calculateResult = (total) => {
     const result = total.match(new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)(\\-?[\\d]{1,3})'));
@@ -43,14 +32,6 @@ const digitClickEvent = (e) => {
         }
         document.getElementById('total').innerText = result;
     }
-};
-const getCountOperationdataSet = () => {
-    const operations = document.getElementsByClassName('operations')[0];
-    return operations.dataset['count'] ? operations.dataset['count'] : '';
-};
-const setCountOperationdataSet = (count) => {
-    const operations = document.getElementsByClassName('operations')[0];
-    operations.dataset['count'] = count;
 };
 const operatorEvent = (e) => {
     const eventTarget = e.target;
