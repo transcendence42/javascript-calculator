@@ -54,7 +54,7 @@ const operatorEvent = (e) => {
     if (Number(totalTarget.innerText) === 0) {
         return;
     }
-    else {
+    else if (!['/', '-', 'X', '+'].includes(totalTarget.innerText[totalTarget.innerText.length - 1])) {
         document.getElementById('total').innerText += eventTarget.innerText;
     }
 };
