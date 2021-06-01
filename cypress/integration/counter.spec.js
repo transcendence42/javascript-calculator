@@ -7,7 +7,18 @@ const testInputClickEvent = (first, result) => {
   cy.get('#total').should('have.text', result);
 };
 
-const testTwoInputCalculateEvent = (first, oper, second, result) => {};
+const testTwoInputCalculateEvent = (first, oper, second, result) => {
+  cy.get('.digit')
+    .contains(first)
+    .click();
+  cy.get('.operation')
+    .contains(oper)
+    .click();
+  cy.get('.digit')
+    .contains(second)
+    .click();
+  cy.get('#total').should('have.text', result);
+};
 
 describe('initial value', () => {
   beforeEach(() => {
@@ -54,7 +65,7 @@ describe('Render digit when button clicked', () => {
   });
 });
 
-describe('Max input length 3', () => {
+describe('Render max input length 3 when button click', () => {
   beforeEach(() => {
     cy.visit('/javascript-calculator/');
   });
@@ -72,5 +83,14 @@ describe('Max input length 3', () => {
   });
   it('button 1 2 3 4', () => {
     testInputClickEvent([1, 2, 3], '123');
+  });
+});
+
+describe('Calculate two input when button click', () => {
+  beforeEach(() => {
+    cy.visit('/javascript-calculator/');
+  });
+  it('button 1 2', () => {
+    testTwoInputCalculateEvent(1, '+', 2, '3');
   });
 });
