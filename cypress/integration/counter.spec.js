@@ -17,6 +17,9 @@ const testTwoInputCalculateEvent = (first, oper, second, result) => {
   cy.get('.digit')
     .contains(second)
     .click();
+  cy.get('.operations')
+    .contains('=')
+    .click();
   cy.get('#total').should('have.text', result);
 };
 
