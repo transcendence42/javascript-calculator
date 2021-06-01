@@ -49,7 +49,7 @@ function parseInput(
 function calculate(num1: number, num2: number, operator: string): string {
   let ret: string = "";
   if (operator === "/") {
-    ret = String(num1 / num2);
+    ret = String(Math.floor(num1 / num2));
   } else if (operator === "X") {
     ret = String(num1 * num2);
   } else if (operator === "-") {
