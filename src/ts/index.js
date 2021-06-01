@@ -27,12 +27,17 @@ function findOperator(str) {
 }
 function parseInput(str) {
     var prompt = document.getElementById("total").innerHTML;
+    var startWithMinus = false;
+    if (prompt[0] === '-') {
+        prompt = prompt.slice(1, prompt.length);
+        startWithMinus = true;
+    }
     var operator = findOperator(prompt);
     var num1;
     var num2;
     if (operator !== "none") {
         var nums = prompt.split(operator);
-        num1 = nums[0];
+        num1 = startWithMinus ? '-' + nums[0] : nums[0];
         num2 = nums[1];
     }
     else {

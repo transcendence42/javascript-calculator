@@ -26,13 +26,18 @@ function parseInput(
   str: string
 ): { num1: string; num2: string; operator: string } {
   let prompt: string = document.getElementById("total").innerHTML;
+  let startWithMinus: boolean = false;
+  if (prompt[0] === "-") {
+    prompt = prompt.slice(1, prompt.length);
+    startWithMinus = true;
+  }
   let operator: string = findOperator(prompt);
   let num1: string;
   let num2: string;
 
   if (operator !== "none") {
     let nums = prompt.split(operator);
-    num1 = nums[0];
+    num1 = startWithMinus ? "-" + nums[0] : nums[0];
     num2 = nums[1];
   } else {
     num1 = prompt;
