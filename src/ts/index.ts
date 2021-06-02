@@ -3,7 +3,7 @@ class parsedInput {
   num2: string;
   operator: string;
 
-  constructor (operator: string, num1: string, num2: string) {
+  constructor(operator: string, num1: string, num2: string) {
     this.operator = operator;
     this.num1 = num1;
     this.num2 = num2;
@@ -32,14 +32,19 @@ function parseInput(str: string): parsedInput {
     startWithMinus = true;
   }
   const operator: string = findOperator(prompt);
-  const nums: string[] = operator === "none" ? [prompt, "1"] : prompt.split(operator);
-  return new parsedInput(operator, startWithMinus ? "-" + nums[0] : nums[0], nums[1]);
+  const nums: string[] =
+    operator === "none" ? [prompt, "1"] : prompt.split(operator);
+  return new parsedInput(
+    operator,
+    startWithMinus ? "-" + nums[0] : nums[0],
+    nums[1]
+  );
 }
 
 function calculate(num1: number, num2: number, operator: string): string {
-  switch(operator) {
+  switch (operator) {
     case "/":
-      return String(Math.floor(num1 / num2))
+      return String(Math.floor(num1 / num2));
     case "X":
       return String(num1 * num2);
     case "-":
@@ -47,33 +52,72 @@ function calculate(num1: number, num2: number, operator: string): string {
     case "+":
       return String(num1 + num2);
     default:
-      return '';
+      return "";
   }
 }
 
-function checkInputValidation(str: string): boolean {
-  // if (){
-  //   return false;
-  // }
+function isOperator(input: string): boolean {
+  switch (input) {
+    case "/":
+      return true;
+    case "X":
+      return true;
+    case "-":
+      return true;
+    case "+":
+      return true;
+    default:
+      return false;
+  }
+}
+
+function checkInputValidation(input: string, str: string): boolean {
+  let newStr: string = str;
+  if (str[0] === "-") {
+    newStr = str.slice(1, prompt.length);
+  }
+  let operator: string = findOperator(newStr);
+  if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
+    console.log("case1");
+    return false;
+  } else if (operator === "none" && newStr.length > 3) {
+    console.log("case1");
+    return false;
+  } else if (
+    operator !== "none" &&
+    newStr.split(operator).filter(x => x.length > 3).length &&
+    input != "="
+  ) {
+    console.log("case2");
+    return false;
+  }
   return true;
 }
 
 function showInput(str: string) {
-  const prompt: HTMLElement = document.getElementById('total');
-  const oldText = prompt.innerHTML
-  if (!checkInputValidation(oldText)) {
-   str = ''; 
+  const prompt: HTMLElement = document.getElementById("total");
+  const oldText = prompt.innerHTML;
+  if (checkInputValidation(str, oldText)) {
+    if (prompt.dataset.type === "result") {
+      prompt.innerHTML = str;
+      prompt.setAttribute("data-type", "input");
+    }
+    else {
+      prompt.innerHTML = oldText + str;
+    }
   }
-  if (prompt.dataset.type === "result") {
-    prompt.innerHTML = str;
-    prompt.setAttribute("data-type", "input");
-  } else {
-    prompt.innerHTML = oldText + str;
-  }
+
+
+  // if (prompt.dataset.type === "result") {
+  //   prompt.innerHTML = str;
+  //   prompt.setAttribute("data-type", "input");
+  // } else if (checkInputValidation(str, oldText)) {
+  //   prompt.innerHTML = oldText + str;
+  // }
 }
 
 function showResult(str: string) {
-  const prompt: HTMLElement = document.getElementById('total');
+  const prompt: HTMLElement = document.getElementById("total");
   prompt.innerHTML = str;
   prompt.setAttribute("data-type", "result");
 }
@@ -115,7 +159,7 @@ function setEventListner() {
 }
 
 function setDataSet() {
-  document.getElementById('total').setAttribute("data-type", "result");
+  document.getElementById("total").setAttribute("data-type", "result");
 }
 
 function init() {

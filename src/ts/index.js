@@ -45,31 +45,66 @@ function calculate(num1, num2, operator) {
         case "+":
             return String(num1 + num2);
         default:
-            return '';
+            return "";
     }
 }
-function checkInputValidation(str) {
-    // if (){
-    //   return false;
-    // }
+function isOperator(input) {
+    switch (input) {
+        case "/":
+            return true;
+        case "X":
+            return true;
+        case "-":
+            return true;
+        case "+":
+            return true;
+        default:
+            return false;
+    }
+}
+function checkInputValidation(input, str) {
+    var newStr = str;
+    if (str[0] === "-") {
+        newStr = str.slice(1, prompt.length);
+    }
+    var operator = findOperator(newStr);
+    if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
+        console.log("case1");
+        return false;
+    }
+    else if (operator === "none" && newStr.length > 3) {
+        console.log("case1");
+        return false;
+    }
+    else if (operator !== "none" &&
+        newStr.split(operator).filter(function (x) { return x.length > 3; }).length &&
+        input != "=") {
+        console.log("case2");
+        return false;
+    }
     return true;
 }
 function showInput(str) {
-    var prompt = document.getElementById('total');
+    var prompt = document.getElementById("total");
     var oldText = prompt.innerHTML;
-    if (!checkInputValidation(oldText)) {
-        str = '';
+    if (checkInputValidation(str, oldText)) {
+        if (prompt.dataset.type === "result") {
+            prompt.innerHTML = str;
+            prompt.setAttribute("data-type", "input");
+        }
+        else {
+            prompt.innerHTML = oldText + str;
+        }
     }
-    if (prompt.dataset.type === "result") {
-        prompt.innerHTML = str;
-        prompt.setAttribute("data-type", "input");
-    }
-    else {
-        prompt.innerHTML = oldText + str;
-    }
+    // if (prompt.dataset.type === "result") {
+    //   prompt.innerHTML = str;
+    //   prompt.setAttribute("data-type", "input");
+    // } else if (checkInputValidation(str, oldText)) {
+    //   prompt.innerHTML = oldText + str;
+    // }
 }
 function showResult(str) {
-    var prompt = document.getElementById('total');
+    var prompt = document.getElementById("total");
     prompt.innerHTML = str;
     prompt.setAttribute("data-type", "result");
 }
@@ -107,7 +142,7 @@ function setEventListner() {
     setModifierController();
 }
 function setDataSet() {
-    document.getElementById('total').setAttribute("data-type", "result");
+    document.getElementById("total").setAttribute("data-type", "result");
 }
 function init() {
     setEventListner();
