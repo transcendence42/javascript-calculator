@@ -52,7 +52,7 @@ function calculate(num1: number, num2: number, operator: string): string {
     case "+":
       return String(num1 + num2);
     default:
-      return "";
+      return String(num1 * num2);
   }
 }
 
@@ -78,17 +78,15 @@ function checkInputValidation(input: string, str: string): boolean {
   }
   let operator: string = findOperator(newStr);
   if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
-    console.log("case1");
     return false;
   } else if (operator === "none" && newStr.length > 3) {
-    console.log("case1");
     return false;
   } else if (
     operator !== "none" &&
-    newStr.split(operator).filter(x => x.length > 3).length &&
+    newStr.split(operator)[1].length >= 3 &&
     input != "="
   ) {
-    console.log("case2");
+    console.log("Case3");
     return false;
   }
   return true;
@@ -97,23 +95,13 @@ function checkInputValidation(input: string, str: string): boolean {
 function showInput(str: string) {
   const prompt: HTMLElement = document.getElementById("total");
   const oldText = prompt.innerHTML;
-  if (checkInputValidation(str, oldText)) {
-    if (prompt.dataset.type === "result") {
-      prompt.innerHTML = str;
-      prompt.setAttribute("data-type", "input");
-    }
-    else {
-      prompt.innerHTML = oldText + str;
-    }
+  if (prompt.dataset.type === "result") {
+    prompt.innerHTML = str;
+    prompt.setAttribute("data-type", "input");
   }
-
-
-  // if (prompt.dataset.type === "result") {
-  //   prompt.innerHTML = str;
-  //   prompt.setAttribute("data-type", "input");
-  // } else if (checkInputValidation(str, oldText)) {
-  //   prompt.innerHTML = oldText + str;
-  // }
+  else if (checkInputValidation(str, oldText)) {
+      prompt.innerHTML = oldText + str;
+  }
 }
 
 function showResult(str: string) {
