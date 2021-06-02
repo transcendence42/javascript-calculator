@@ -52,7 +52,7 @@ function calculate(num1: number, num2: number, operator: string): string {
     case "+":
       return String(num1 + num2);
     default:
-      return String(num1 * num2);
+      return String(num1);
   }
 }
 
@@ -72,24 +72,19 @@ function isOperator(input: string): boolean {
 }
 
 function checkInputValidation(input: string, str: string): boolean {
-  let newStr: string = str;
-  if (str[0] === "-") {
-    newStr = str.slice(1, prompt.length);
-  }
+  let newStr: string = str[0] === "-" ? str.slice(1, prompt.length) : str;
   let operator: string = findOperator(newStr);
-  if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
-    return false;
-  } else if (operator === "none" && newStr.length > 3) {
-    return false;
+  if (operator === "none" && newStr.length <= 2) {
+    return true;
+  } else if (operator === "none" && newStr.length === 3 && isOperator(input)) {
+    return true;
   } else if (
     operator !== "none" &&
-    newStr.split(operator)[1].length >= 3 &&
-    input != "="
+    newStr.split(operator)[1].length <= 2 && !isOperator(input)
   ) {
-    console.log("Case3");
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
 function showInput(str: string) {
@@ -98,9 +93,8 @@ function showInput(str: string) {
   if (prompt.dataset.type === "result") {
     prompt.innerHTML = str;
     prompt.setAttribute("data-type", "input");
-  }
-  else if (checkInputValidation(str, oldText)) {
-      prompt.innerHTML = oldText + str;
+  } else if (checkInputValidation(str, oldText)) {
+    prompt.innerHTML = oldText + str;
   }
 }
 

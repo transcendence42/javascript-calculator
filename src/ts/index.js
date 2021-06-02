@@ -45,7 +45,7 @@ function calculate(num1, num2, operator) {
         case "+":
             return String(num1 + num2);
         default:
-            return String(num1 * num2);
+            return String(num1);
     }
 }
 function isOperator(input) {
@@ -63,24 +63,30 @@ function isOperator(input) {
     }
 }
 function checkInputValidation(input, str) {
-    var newStr = str;
-    if (str[0] === "-") {
-        newStr = str.slice(1, prompt.length);
-    }
+    var newStr = str[0] === "-" ? str.slice(1, prompt.length) : str;
     var operator = findOperator(newStr);
-    if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
-        return false;
+    // if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
+    //   return false;
+    // } else if (operator === "none" && newStr.length > 3) {
+    //   return false;
+    // } else if (
+    //   operator !== "none" &&
+    //   newStr.split(operator)[1].length >= 3 &&
+    //   input != "="
+    // ) {
+    //   return false;
+    // }
+    // return true;
+    if (operator === "none" && newStr.length <= 2) {
+        return true;
     }
-    else if (operator === "none" && newStr.length > 3) {
-        return false;
+    else if (operator === "none" && newStr.length === 3 && isOperator(input)) {
+        return true;
     }
-    else if (operator !== "none" &&
-        newStr.split(operator)[1].length >= 3 &&
-        input != "=") {
-        console.log("Case3");
-        return false;
+    else if (operator !== "none" && (newStr.split(operator)[1].length <= 2 && !isOperator(input))) {
+        return true;
     }
-    return true;
+    return false;
 }
 function showInput(str) {
     var prompt = document.getElementById("total");
