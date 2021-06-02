@@ -11,11 +11,15 @@ describe('계산기 테스트', () => {
     cy.visit('/');
   });
 
-	it('1. 숫자 입력 시 결과창에 표시', () => {
-    let total = '0';
-    for (let digit = 1; digit < 10 ; digit += 1) {
+	it('1. 숫자 입력 시 순서대로 결과창에 표시', () => {
+    let totalValue = '0';
+    cy.get('.digit').contains('1').click();
+    totalValue = '1';
+    cy.get('#total').should('have.text', totalValue);
+    for (let digit = 2; digit < 10 ; digit += 1) {
       cy.get('.digit').contains(String(digit)).click();
-      cy.get('#total').should('have.text', total += String(digit));
+      totalValue + String(digit);
+      cy.get('#total').should('have.text', totalValue);
     }
   });
 

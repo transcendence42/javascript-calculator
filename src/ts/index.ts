@@ -1,7 +1,7 @@
 import { controller } from "./controller/index.js";
 
-const calculator = (): void => {
+const app = (): void => {
   controller();
 };
 
-calculator();
+app();
