@@ -79,8 +79,7 @@ function setOperationsController() {
   const operations = document.getElementsByClassName("operations");
   operations[0].addEventListener("click", e => {
     if ((<Element>e.target).innerHTML === "=") {
-      let input;
-      input = parseInput(document.getElementById("total").innerHTML);
+      const input: parsedInput = parseInput(document.getElementById("total").innerHTML);
       showResult(calculate(+input.num1, +input.num2, input.operator));
     } else {
       showClickedButton((<Element>e.target).innerHTML);
