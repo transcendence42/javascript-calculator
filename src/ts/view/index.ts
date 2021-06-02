@@ -8,6 +8,9 @@ export const pushTotalValue = (e: Event): void => {
   const totalTarget: HTMLElement | null = document.getElementById('total');
   let totalValue: string = totalTarget!.innerText;
 
+  console.log(totalValue);
+  console.log(digitValue);
+
   if (totalValue === '0') {
     totalValue = digitValue;
     return;
