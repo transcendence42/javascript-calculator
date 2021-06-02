@@ -1,3 +1,15 @@
+class parsedInput {
+  num1: string;
+  num2: string;
+  operator: string;
+
+  constructor (operator: string, num1: string, num2: string) {
+    this.operator = operator;
+    this.num1 = num1;
+    this.num2 = num2;
+  }
+}
+
 function showClickedButton(str: string) {
   let prompt: string = document.getElementById("total").innerHTML;
   console.log(str);
@@ -22,33 +34,16 @@ function findOperator(str: string): string {
   }
 }
 
-function parseInput(
-  str: string
-): { num1: string; num2: string; operator: string } {
+function parseInput(str: string): parsedInput {
   let prompt: string = document.getElementById("total").innerHTML;
   let startWithMinus: boolean = false;
   if (prompt[0] === "-") {
     prompt = prompt.slice(1, prompt.length);
     startWithMinus = true;
   }
-  let operator: string = findOperator(prompt);
-  let num1: string;
-  let num2: string;
-
-  if (operator !== "none") {
-    let nums = prompt.split(operator);
-    num1 = startWithMinus ? "-" + nums[0] : nums[0];
-    num2 = nums[1];
-  } else {
-    num1 = prompt;
-    num2 = "1";
-    operator = "X";
-  }
-  return {
-    num1: num1,
-    num2: num2,
-    operator: operator
-  };
+  const operator: string = findOperator(prompt);
+  const nums: string[] = operator === "none" ? [prompt, "1"] : prompt.split(operator);
+  return new parsedInput(operator, startWithMinus ? "-" + nums[0] : nums[0], nums[1]);
 }
 
 function calculate(num1: number, num2: number, operator: string): string {

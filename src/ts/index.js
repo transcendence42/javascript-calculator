@@ -1,3 +1,11 @@
+var parsedInput = /** @class */ (function () {
+    function parsedInput(operator, num1, num2) {
+        this.operator = operator;
+        this.num1 = num1;
+        this.num2 = num2;
+    }
+    return parsedInput;
+}());
 function showClickedButton(str) {
     var prompt = document.getElementById("total").innerHTML;
     console.log(str);
@@ -28,28 +36,13 @@ function findOperator(str) {
 function parseInput(str) {
     var prompt = document.getElementById("total").innerHTML;
     var startWithMinus = false;
-    if (prompt[0] === '-') {
+    if (prompt[0] === "-") {
         prompt = prompt.slice(1, prompt.length);
         startWithMinus = true;
     }
     var operator = findOperator(prompt);
-    var num1;
-    var num2;
-    if (operator !== "none") {
-        var nums = prompt.split(operator);
-        num1 = startWithMinus ? '-' + nums[0] : nums[0];
-        num2 = nums[1];
-    }
-    else {
-        num1 = prompt;
-        num2 = "1";
-        operator = "X";
-    }
-    return {
-        num1: num1,
-        num2: num2,
-        operator: operator
-    };
+    var nums = operator === "none" ? [prompt, "1"] : prompt.split(operator);
+    return new parsedInput(operator, startWithMinus ? "-" + nums[0] : nums[0], nums[1]);
 }
 function calculate(num1, num2, operator) {
     var ret = "";
