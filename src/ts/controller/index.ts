@@ -1,7 +1,6 @@
 import { pushTotalValue, clearTotalValue } from '../view/index.js';
 
 export const controller = (): void => {
-  console.log('hi');
   document
     .getElementsByClassName("digits")[0]
     .addEventListener("click", (e) => {

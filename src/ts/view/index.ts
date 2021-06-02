@@ -4,16 +4,12 @@ export const clearTotalValue = (): void => {
 
 export const pushTotalValue = (e: Event): void => {
   const digitTarget: HTMLElement = e.target as HTMLElement;
-  const digitValue: string = digitTarget!.innerText;
+  let digitValue: string = digitTarget!.innerText;
   const totalTarget: HTMLElement | null = document.getElementById('total');
-  let totalValue: string = totalTarget!.innerText;
 
-  console.log(totalValue);
-  console.log(digitValue);
-
-  if (totalValue === '0') {
-    totalValue = digitValue;
+  if (totalTarget!.innerText === '0') {
+    totalTarget!.innerText = digitValue;
     return;
   }
-  totalValue + digitValue;
+  totalTarget!.innerText += digitValue;
 }
