@@ -65,25 +65,14 @@ function isOperator(input) {
 function checkInputValidation(input, str) {
     var newStr = str[0] === "-" ? str.slice(1, prompt.length) : str;
     var operator = findOperator(newStr);
-    // if (operator === "none" && newStr.length == 3 && !isOperator(input)) {
-    //   return false;
-    // } else if (operator === "none" && newStr.length > 3) {
-    //   return false;
-    // } else if (
-    //   operator !== "none" &&
-    //   newStr.split(operator)[1].length >= 3 &&
-    //   input != "="
-    // ) {
-    //   return false;
-    // }
-    // return true;
     if (operator === "none" && newStr.length <= 2) {
         return true;
     }
     else if (operator === "none" && newStr.length === 3 && isOperator(input)) {
         return true;
     }
-    else if (operator !== "none" && (newStr.split(operator)[1].length <= 2 && !isOperator(input))) {
+    else if (operator !== "none" &&
+        newStr.split(operator)[1].length <= 2 && !isOperator(input)) {
         return true;
     }
     return false;
@@ -92,6 +81,7 @@ function showInput(str) {
     var prompt = document.getElementById("total");
     var oldText = prompt.innerHTML;
     if (prompt.dataset.type === "result") {
+        console.log(str);
         prompt.innerHTML = str;
         prompt.setAttribute("data-type", "input");
     }
@@ -119,9 +109,6 @@ function setOperationsController() {
             showResult(calculate(+input.num1, +input.num2, input.operator));
         }
         else {
-            if (total.dataset.type === "result") {
-                total.dataset.type = "input";
-            }
             showInput(e.target.innerHTML);
         }
     });

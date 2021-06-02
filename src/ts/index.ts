@@ -91,6 +91,7 @@ function showInput(str: string) {
   const prompt: HTMLElement = document.getElementById("total");
   const oldText = prompt.innerHTML;
   if (prompt.dataset.type === "result") {
+    console.log(str);
     prompt.innerHTML = str;
     prompt.setAttribute("data-type", "input");
   } else if (checkInputValidation(str, oldText)) {
@@ -119,9 +120,6 @@ function setOperationsController() {
       const input: parsedInput = parseInput(total.innerHTML);
       showResult(calculate(+input.num1, +input.num2, input.operator));
     } else {
-      if (total.dataset.type === "result") {
-        total.dataset.type = "input";
-      }
       showInput((<HTMLElement>e.target).innerHTML);
     }
   });
