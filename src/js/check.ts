@@ -1,7 +1,10 @@
 export const checkValidInput = (total: string): string => {
-  const result: any = total.match(
+  const result: RegExpMatchArray | null = total.match(
     new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)?(\\-?[\\d]{1,3})?')
   );
+  if (!result) {
+    return '';
+  }
   if (result[2] === undefined) {
     if (result[1] === undefined) {
         
