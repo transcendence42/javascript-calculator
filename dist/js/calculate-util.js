@@ -14,6 +14,9 @@ const calculateOperator = (total, operator, num) => {
 };
 const calculateResult = (total) => {
     const result = total.match(new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)(\\-?[\\d]{1,3})'));
-    return calculateOperator(Number(result[1]), result[2], Number(result[3]));
+    if (result) {
+        return calculateOperator(Number(result[1]), result[2], Number(result[3]));
+    }
+    return 0;
 };
 export { calculateResult };

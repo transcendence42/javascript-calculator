@@ -18,10 +18,10 @@ const calculateResult = (total: string): number => {
   const result: RegExpMatchArray | null = total.match(
     new RegExp('(\\-?[\\d]{1,3})(X|\\-|\\+|\\/|\\=)(\\-?[\\d]{1,3})')
   );
-  if (result === null) {
-    return 0;
+  if (result) {
+    return calculateOperator(Number(result[1]), result[2], Number(result[3]));
   }
-  return calculateOperator(Number(result[1]), result[2], Number(result[3]));
+  return 0;
 };
 
 export { calculateResult };
