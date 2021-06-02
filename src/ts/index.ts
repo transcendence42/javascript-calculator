@@ -10,16 +10,6 @@ class parsedInput {
   }
 }
 
-function showClickedButton(str: string) {
-  let prompt: string = document.getElementById("total").innerHTML;
-  console.log(str);
-  if (prompt === "0") {
-    showResult(str);
-  } else {
-    showResult(prompt + str);
-  }
-}
-
 function findOperator(str: string): string {
   if (str.indexOf("/") != -1) {
     return "/";
@@ -60,29 +50,42 @@ function calculate(num1: number, num2: number, operator: string): string {
   return ret;
 }
 
-function showResult(str: string) {
-  document.getElementById("total").innerHTML = str;
+function showInput(str: string) {
+  const prompt: HTMLElement = document.getElementById('total');
+  const oldText = prompt.innerHTML
+  if (prompt.dataset.type === "result") {
+    prompt.innerHTML = str;
+    prompt.setAttribute("data-type", "input");
+  } else {
+    prompt.innerHTML = oldText + str;
+  }
 }
 
-function clearPrompt() {
-  document.getElementById("total").innerHTML = "";
+function showResult(str: string) {
+  const prompt: HTMLElement = document.getElementById('total');
+  prompt.innerHTML = str;
+  prompt.setAttribute("data-type", "result");
 }
 
 function setDigitsController() {
   const digits = document.getElementsByClassName("digits");
   digits[0].addEventListener("click", e => {
-    showClickedButton((<Element>e.target).innerHTML);
+    showInput((<Element>e.target).innerHTML);
   });
 }
 
 function setOperationsController() {
   const operations = document.getElementsByClassName("operations");
+  const total: HTMLElement = document.getElementById("total");
   operations[0].addEventListener("click", e => {
-    if ((<Element>e.target).innerHTML === "=") {
-      const input: parsedInput = parseInput(document.getElementById("total").innerHTML);
+    if ((<HTMLElement>e.target).innerHTML === "=") {
+      const input: parsedInput = parseInput(total.innerHTML);
       showResult(calculate(+input.num1, +input.num2, input.operator));
     } else {
-      showClickedButton((<Element>e.target).innerHTML);
+      if (total.dataset.type === "result") {
+        total.dataset.type = "input";
+      }
+      showInput((<HTMLElement>e.target).innerHTML);
     }
   });
 }
@@ -90,8 +93,7 @@ function setOperationsController() {
 function setModifierController() {
   const modifier = document.getElementsByClassName("modifier");
   modifier[0].addEventListener("click", e => {
-    clearPrompt();
-    showClickedButton("0");
+    showResult("0");
   });
 }
 
@@ -101,8 +103,13 @@ function setEventListner() {
   setModifierController();
 }
 
+function setDataSet() {
+  document.getElementById('total').setAttribute("data-type", "result");
+}
+
 function init() {
   setEventListner();
+  setDataSet();
 }
 
 init();

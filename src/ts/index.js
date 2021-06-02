@@ -6,16 +6,6 @@ var parsedInput = /** @class */ (function () {
     }
     return parsedInput;
 }());
-function showClickedButton(str) {
-    var prompt = document.getElementById("total").innerHTML;
-    console.log(str);
-    if (prompt === "0") {
-        showResult(str);
-    }
-    else {
-        showResult(prompt + str);
-    }
-}
 function findOperator(str) {
     if (str.indexOf("/") != -1) {
         return "/";
@@ -60,36 +50,48 @@ function calculate(num1, num2, operator) {
     }
     return ret;
 }
-function showResult(str) {
-    document.getElementById("total").innerHTML = str;
+function showInput(str) {
+    var prompt = document.getElementById('total');
+    var oldText = prompt.innerHTML;
+    if (prompt.dataset.type === "result") {
+        prompt.innerHTML = str;
+        prompt.setAttribute("data-type", "input");
+    }
+    else {
+        prompt.innerHTML = oldText + str;
+    }
 }
-function clearPrompt() {
-    document.getElementById("total").innerHTML = "";
+function showResult(str) {
+    var prompt = document.getElementById('total');
+    prompt.innerHTML = str;
+    prompt.setAttribute("data-type", "result");
 }
 function setDigitsController() {
     var digits = document.getElementsByClassName("digits");
     digits[0].addEventListener("click", function (e) {
-        showClickedButton(e.target.innerHTML);
+        showInput(e.target.innerHTML);
     });
 }
 function setOperationsController() {
     var operations = document.getElementsByClassName("operations");
+    var total = document.getElementById("total");
     operations[0].addEventListener("click", function (e) {
         if (e.target.innerHTML === "=") {
-            var input = void 0;
-            input = parseInput(document.getElementById("total").innerHTML);
+            var input = parseInput(total.innerHTML);
             showResult(calculate(+input.num1, +input.num2, input.operator));
         }
         else {
-            showClickedButton(e.target.innerHTML);
+            if (total.dataset.type === "result") {
+                total.dataset.type = "input";
+            }
+            showInput(e.target.innerHTML);
         }
     });
 }
 function setModifierController() {
     var modifier = document.getElementsByClassName("modifier");
     modifier[0].addEventListener("click", function (e) {
-        clearPrompt();
-        showClickedButton("0");
+        showResult("0");
     });
 }
 function setEventListner() {
@@ -97,7 +99,11 @@ function setEventListner() {
     setOperationsController();
     setModifierController();
 }
+function setDataSet() {
+    document.getElementById('total').setAttribute("data-type", "result");
+}
 function init() {
     setEventListner();
+    setDataSet();
 }
 init();
