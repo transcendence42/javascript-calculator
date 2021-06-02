@@ -35,24 +35,31 @@ function parseInput(str) {
     return new parsedInput(operator, startWithMinus ? "-" + nums[0] : nums[0], nums[1]);
 }
 function calculate(num1, num2, operator) {
-    var ret = "";
-    if (operator === "/") {
-        ret = String(Math.floor(num1 / num2));
+    switch (operator) {
+        case "/":
+            return String(Math.floor(num1 / num2));
+        case "X":
+            return String(num1 * num2);
+        case "-":
+            return String(num1 - num2);
+        case "+":
+            return String(num1 + num2);
+        default:
+            return '';
     }
-    else if (operator === "X") {
-        ret = String(num1 * num2);
-    }
-    else if (operator === "-") {
-        ret = String(num1 - num2);
-    }
-    else if (operator === "+") {
-        ret = String(num1 + num2);
-    }
-    return ret;
+}
+function checkInputValidation(str) {
+    // if (){
+    //   return false;
+    // }
+    return true;
 }
 function showInput(str) {
     var prompt = document.getElementById('total');
     var oldText = prompt.innerHTML;
+    if (!checkInputValidation(oldText)) {
+        str = '';
+    }
     if (prompt.dataset.type === "result") {
         prompt.innerHTML = str;
         prompt.setAttribute("data-type", "input");

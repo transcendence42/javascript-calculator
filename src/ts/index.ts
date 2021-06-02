@@ -37,22 +37,33 @@ function parseInput(str: string): parsedInput {
 }
 
 function calculate(num1: number, num2: number, operator: string): string {
-  let ret: string = "";
-  if (operator === "/") {
-    ret = String(Math.floor(num1 / num2));
-  } else if (operator === "X") {
-    ret = String(num1 * num2);
-  } else if (operator === "-") {
-    ret = String(num1 - num2);
-  } else if (operator === "+") {
-    ret = String(num1 + num2);
+  switch(operator) {
+    case "/":
+      return String(Math.floor(num1 / num2))
+    case "X":
+      return String(num1 * num2);
+    case "-":
+      return String(num1 - num2);
+    case "+":
+      return String(num1 + num2);
+    default:
+      return '';
   }
-  return ret;
+}
+
+function checkInputValidation(str: string): boolean {
+  // if (){
+  //   return false;
+  // }
+  return true;
 }
 
 function showInput(str: string) {
   const prompt: HTMLElement = document.getElementById('total');
   const oldText = prompt.innerHTML
+  if (!checkInputValidation(oldText)) {
+   str = ''; 
+  }
   if (prompt.dataset.type === "result") {
     prompt.innerHTML = str;
     prompt.setAttribute("data-type", "input");
