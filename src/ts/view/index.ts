@@ -1,6 +1,10 @@
 import { EQUAL } from "../constants/index.js";
-import { checkFirstTotalValue, checkPreventClickValue, makeFormula} from "../controller/validator.js";
-import { calculator } from "../model/calculator.js";
+import {
+  checkFirstTotalValue,
+  checkPreventClickValue,
+  isNumber,
+} from "../controller/validator.js";
+import { calculator, makeFormula } from "../model/calculator.js";
 
 export const clearTotalValue = (): void => {
   document.getElementById("total")!.innerText = "0";
@@ -9,12 +13,12 @@ export const clearTotalValue = (): void => {
 export const pushTotalValue = (e: Event): void => {
   const clickTarget: HTMLElement = e.target as HTMLElement;
   const totalTarget: HTMLElement | null = document.getElementById("total");
+  const formula: Array<string> = makeFormula(totalTarget!.innerText);
   let clickValue: string = clickTarget!.innerText;
 
-  // if (!isNaN(Number(totalTarget!.innerText)) && totalTarget!.innerText.length > 3) {
-  //   console.log('길이문제')
-  //   return;
-  // }
+  if (totalTarget!.innerText.length > 3 && isNumber(totalTarget!.innerText)) {
+    return;
+  } // 계산 결과가 3자리를 넘어가는 경우 [AC] 외에 입력 방지
   if (checkFirstTotalValue(totalTarget!.innerText, clickValue)) {
     totalTarget!.innerText = clickValue;
     return;
@@ -23,19 +27,8 @@ export const pushTotalValue = (e: Event): void => {
     return;
   } // 입력 방지해야하는 상황 체크
   if (clickValue === EQUAL) {
-    totalTarget!.innerText = String(calculator(makeFormula(totalTarget!.innerText)));
+    totalTarget!.innerText = String(calculator(formula));
     return;
-  } // [=]이 입력된다면 totalvalue체크 후 계산
+  } // [=]이 입력된다면 공식을 계산기에 넘겨서 값 받은 후 렌더링
   totalTarget!.innerText += clickValue;
 };
-
-// const checkPreventClickValue = (
-//   totalValue: string,
-//   clickValue: string
-// ): boolean => {
-//   const lastTotalValue = totalValue.charAt(totalValue.length - 1);
-//   if (REGEXP.OPERATORS.test(lastTotalValue) && REGEXP.OPERATORS.test(clickValue)) {
-//     return true;
-//   }
-//   return false;
-// };

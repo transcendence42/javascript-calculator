@@ -13,8 +13,3 @@ export const REGEXP = {
   NUMBERS: '\\-?\\d{1,3}',
   OPERATORS: 'X|\\-|\\+|\\/{1}'
 }
-
-// export const REGEXP = {
-//   NUMBERS: /\d{1,3}/,
-//   OPERATORS: /[+-X/]/,
-// }

@@ -1,4 +1,4 @@
-import { OPERATOR } from "../constants/index.js";
+import { OPERATOR, REGEXP } from "../constants/index.js";
 
 export const calculator = (splitedTotalValue: Array<string>): number => {
   if (splitedTotalValue.length === 0) {
@@ -19,4 +19,14 @@ export const calculator = (splitedTotalValue: Array<string>): number => {
     default:
       return 0;
   }
+};
+
+export const makeFormula = (totalValue: string): Array<string> => {
+  const totalValueArray: RegExpMatchArray | null = totalValue.match(
+    "(" + REGEXP.NUMBERS + ")(" + REGEXP.OPERATORS + ")(" + REGEXP.NUMBERS + ")"
+  );
+  if (totalValueArray) {
+    return [totalValueArray[1], totalValueArray[2], totalValueArray[3]];
+  }
+  return [];
 };
