@@ -22,5 +22,29 @@ export default class App {
           totalDiv.innerText = String(Number(totalDiv.innerText));
         }
       });
+    //click operation
+    document
+      .querySelector("div.operations.subgrid")!
+      .addEventListener("click", evt => {
+        if ((evt.target as HTMLElement).className !== "operation") {
+          return;
+        }
+        const operation: string = (evt.target as HTMLButtonElement).innerText;
+        const num = Number(totalDiv.innerText);
+        if (isNaN(num)) {
+          return;
+        }
+        if (operation !== "=") {
+          equation.setFirstNum(num);
+          equation.setOperation(operation);
+          totalDiv.innerText = operation;
+        } else {
+          equation.setSecondNum(num);
+          let result = equation.calculate();
+          // console.log(`result: ${result}`);
+          totalDiv.innerText =
+            result !== null ? String(result) : totalDiv.innerText;
+        }
+      });
   }
 }
