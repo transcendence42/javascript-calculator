@@ -31,7 +31,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('initial value', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('total value', () => {
 	  cy.get('#total').should('have.text', '0');
@@ -40,7 +40,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('Render digit when button clicked', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 0', () => {
 	  testInputClickEvent([0], '0');
@@ -76,7 +76,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('Render max input length 3 when button click', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 1 2', () => {
 	  testInputClickEvent([1, 2], '12');
@@ -97,7 +97,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('Calculate two input when button click', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 1 + 2', () => {
 	  testTwoInputCalculateEvent([1], ['+'], [2], '3');
@@ -122,7 +122,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('계산 결과를 표현할 때 소수점 이하는 버림한다.', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 1 / 3', () => {
 	  testTwoInputCalculateEvent([1], ['/'], [3], '0');
@@ -137,7 +137,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('AC(All Clear) 버튼을 누를때 total을 0으로 변경한다.', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 1 / 3', () => {
 	  testTwoInputCalculateEvent([5], ['/'], [2], '2');
@@ -153,7 +153,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('operator가 연속으로 나왔을때 한개만 적용되도록 처리', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 1 /// 3', () => {
 	  testTwoInputCalculateEvent([5], ['/', '/', '/'], [2], '2');
@@ -169,7 +169,7 @@ const testInputClickEvent = (first, result) => {
 
   describe('operator가 2번이상 나왔을때 한개만 적용되도록 처리', () => {
 	beforeEach(() => {
-	  cy.visit('/javascript-calculator/');
+	  cy.visit('/');
 	});
 	it('button 1 + 3 + =', () => {
 	  cy.get('.digit')
