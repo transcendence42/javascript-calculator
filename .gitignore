@@ -275,6 +275,9 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# javascript source file
+src/**/*.js
+
 ### vscode ###
 .vscode/*
 !.vscode/settings.json
