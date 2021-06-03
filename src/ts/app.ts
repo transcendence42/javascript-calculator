@@ -13,30 +13,11 @@ export default class App {
       .addEventListener("click", evt =>
         this.typeNumber(evt.target as HTMLButtonElement)
       );
-    //click operation
     document
       .querySelector("div.operations.subgrid")!
-      .addEventListener("click", evt => {
-        if ((evt.target as HTMLElement).className !== "operation") {
-          return;
-        }
-        const operation: string = (evt.target as HTMLButtonElement).innerText;
-        const num = Number(this.totalDiv.innerText);
-        if (isNaN(num)) {
-          return;
-        }
-        if (operation !== "=") {
-          equation.setFirstNum(num);
-          equation.setOperation(operation);
-          this.totalDiv.innerText = operation;
-        } else {
-          equation.setSecondNum(num);
-          let result = this.calculate(equation);
-          // console.log(`result: ${result}`);
-          this.totalDiv.innerText =
-            result !== null ? String(result) : this.totalDiv.innerText;
-        }
-      });
+      .addEventListener("click", evt =>
+        this.clickOperations(evt.target as HTMLButtonElement, equation)
+      );
   }
   allClear(equation: Equation) {
     equation.init();
@@ -52,6 +33,27 @@ export default class App {
     if (this.totalDiv.innerText.length < 3) {
       this.totalDiv.insertAdjacentText("beforeend", target.innerText);
       this.totalDiv.innerText = String(Number(this.totalDiv.innerText));
+    }
+  }
+  clickOperations(target: HTMLButtonElement, equation: Equation) {
+    if (target.className !== "operation") {
+      return;
+    }
+    const operation: string = target.innerText;
+    const num = Number(this.totalDiv.innerText);
+    equation.setOperation(operation);
+    if (isNaN(num)) {
+      return;
+    }
+    if (operation !== "=") {
+      equation.setFirstNum(num);
+      this.totalDiv.innerText = operation;
+    } else {
+      equation.setSecondNum(num);
+      let result = this.calculate(equation);
+      // console.log(`result: ${result}`);
+      this.totalDiv.innerText =
+        result !== null ? String(result) : this.totalDiv.innerText;
     }
   }
   calculate(equation: Equation): number | null {
