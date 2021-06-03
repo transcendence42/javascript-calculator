@@ -1,5 +1,5 @@
 import { EQUAL } from "../constants/index.js";
-import { checkFirstTotalValue, checkPreventClickValue, checkTotalValue} from "../controller/validator.js";
+import { checkFirstTotalValue, checkPreventClickValue, makeFormula} from "../controller/validator.js";
 import { calculator } from "../model/calculator.js";
 
 export const clearTotalValue = (): void => {
@@ -11,10 +11,10 @@ export const pushTotalValue = (e: Event): void => {
   const totalTarget: HTMLElement | null = document.getElementById("total");
   let clickValue: string = clickTarget!.innerText;
 
-  if (!isNaN(Number(totalTarget!.innerText)) && totalTarget!.innerText.length > 3) {
-    console.log('길이문제')
-    return;
-  }
+  // if (!isNaN(Number(totalTarget!.innerText)) && totalTarget!.innerText.length > 3) {
+  //   console.log('길이문제')
+  //   return;
+  // }
   if (checkFirstTotalValue(totalTarget!.innerText, clickValue)) {
     totalTarget!.innerText = clickValue;
     return;
@@ -23,7 +23,7 @@ export const pushTotalValue = (e: Event): void => {
     return;
   } // 입력 방지해야하는 상황 체크
   if (clickValue === EQUAL) {
-    totalTarget!.innerText = String(calculator(checkTotalValue(totalTarget!.innerText)));
+    totalTarget!.innerText = String(calculator(makeFormula(totalTarget!.innerText)));
     return;
   } // [=]이 입력된다면 totalvalue체크 후 계산
   totalTarget!.innerText += clickValue;

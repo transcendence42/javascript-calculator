@@ -9,8 +9,8 @@ export const OPERATOR = {
 export const EQUAL = '=';
 
 export const REGEXP = {
-  SIGN: '\\-',
-  NUMBERS: '\\d{1,3}',
+  // SIGN: '\\-{1}',
+  NUMBERS: '\\-?\\d{1,3}',
   OPERATORS: 'X|\\-|\\+|\\/{1}'
 }
 
