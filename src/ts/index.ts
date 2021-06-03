@@ -25,7 +25,8 @@ function findOperator(str: string): string {
 }
 
 function parseInput(str: string): parsedInput {
-  let prompt: string = document.getElementById("total").innerHTML;
+  const total = document.getElementById("total") as HTMLElement;
+  let prompt = total.innerHTML as string;
   let startWithMinus: boolean = false;
   if (prompt[0] === "-") {
     prompt = prompt.slice(1, prompt.length);
@@ -88,7 +89,7 @@ function checkInputValidation(input: string, str: string): boolean {
 }
 
 function showInput(str: string) {
-  const prompt: HTMLElement = document.getElementById("total");
+  const prompt= document.getElementById("total") as HTMLElement;
   const oldText = prompt.innerHTML;
   if (prompt.dataset.type === "result") {
     console.log(str);
@@ -100,7 +101,7 @@ function showInput(str: string) {
 }
 
 function showResult(str: string) {
-  const prompt: HTMLElement = document.getElementById("total");
+  const prompt = document.getElementById("total") as HTMLElement;
   prompt.innerHTML = str;
   prompt.setAttribute("data-type", "result");
 }
@@ -114,7 +115,7 @@ function setDigitsController() {
 
 function setOperationsController() {
   const operations = document.getElementsByClassName("operations");
-  const total: HTMLElement = document.getElementById("total");
+  const total = document.getElementById("total") as HTMLElement;
   operations[0].addEventListener("click", e => {
     if ((<HTMLElement>e.target).innerHTML === "=") {
       const input: parsedInput = parseInput(total.innerHTML);
@@ -139,7 +140,8 @@ function setEventListner() {
 }
 
 function setDataSet() {
-  document.getElementById("total").setAttribute("data-type", "result");
+  const total = document.getElementById("total") as HTMLElement;
+  total.setAttribute("data-type", "result");
 }
 
 function init() {
