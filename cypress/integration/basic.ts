@@ -7,19 +7,6 @@ context("calculator", () => {
     cy.get("#total").should("have.text", 0);
   });
 
-  it("click number test", () => {
-    cy.get(".digit").contains(9).click();
-    cy.get(".digit").contains(6).click();
-    cy.get(".digit").contains(3).click();
-    for (let i = 0; i < 50; i++) {
-      cy.get(".operation").contains("X").click();
-      cy.get(".digit").contains(9).click();
-      cy.get(".digit").contains(6).click();
-      cy.get(".digit").contains(3).click();
-      cy.get("#total").should("have.text", 963);
-    }
-  });
-
   it("plus test", () => {
     // 123 + 234 = 357
     cy.get(".digit").contains(1).click();
