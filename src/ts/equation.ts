@@ -5,11 +5,16 @@ interface IEquation {
 }
 
 export default class Equation implements IEquation {
-  public firstNum: number;
-  public secondNum: number;
-  public operation: string;
+  firstNum: number;
+  secondNum: number;
+  operation: string;
 
   constructor() {
+    this.firstNum = 0;
+    this.secondNum = 0;
+    this.operation = "";
+  }
+  init() {
     this.firstNum = 0;
     this.secondNum = 0;
     this.operation = "";
@@ -31,38 +36,5 @@ export default class Equation implements IEquation {
   }
   getOperation(): string {
     return this.operation;
-  }
-  calculate(): number | null {
-    // console.log(
-    //   `firstNum: ${this.firstNum}, secondNum: ${this.secondNum}, operation: ${this.operation}`
-    // );
-    let ret: number | null = null;
-    if (this.operation === "+") {
-      ret = this.plus();
-    } else if (this.operation === "-") {
-      ret = this.minus();
-    } else if (this.operation === "X") {
-      ret = this.multiply();
-    } else if (this.operation === "/") {
-      ret = this.divide();
-    }
-    // console.log(`ret: ${ret}`);
-    // console.log(
-    //   `firstNum: ${this.firstNum}, secondNum: ${this.secondNum}, operation: ${this.operation}`
-    // );
-    this.operation = "";
-    return ret;
-  }
-  private plus(): number {
-    return this.firstNum + this.secondNum;
-  }
-  private minus(): number {
-    return this.firstNum - this.secondNum;
-  }
-  private multiply(): number {
-    return this.firstNum * this.secondNum;
-  }
-  private divide(): number {
-    return Math.floor(this.firstNum / this.secondNum);
   }
 }
