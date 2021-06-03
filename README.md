@@ -21,13 +21,13 @@
 
 ## 환경설정
 
-- [ ] prettier
-- [ ] eslint
-- [ ] typescript
-- [ ] cypress
-- [ ] tsconfig.json
-- [ ] cypress.json
-- [ ] package.json
+- [x] prettier
+- [x] eslint
+- [x] typescript
+- [x] cypress
+- [x] tsconfig.json
+- [x] cypress.json
+- [x] package.json
 
 ## 🎯 기능 요구사항
 
@@ -57,7 +57,7 @@
 
 ## 📄 참고 사항
 
-- 숫자 입력은 **클릭**으로만 가능하다.
+- [ ] 숫자 입력은 **클릭**으로만 가능하다.
 
 <br/>
 
