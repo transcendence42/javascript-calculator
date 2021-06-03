@@ -25,7 +25,6 @@ export const checkPreventClickValue = (
       REGEXP.NUMBERS +
       ")?"
   );
-  console.log(tmpValueArray);
   if (tmpValueArray) {
     if (!tmpValueArray[2] && tmpValueArray[3]) {
       return true;
