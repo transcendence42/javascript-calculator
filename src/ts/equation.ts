@@ -14,10 +14,9 @@ export default class Equation implements IEquation {
     this.secondNum = 0;
     this.operation = "";
   }
-  init() {
+  initNumbers() {
     this.firstNum = 0;
     this.secondNum = 0;
-    this.operation = "";
   }
   setFirstNum(num: number) {
     this.firstNum = num;

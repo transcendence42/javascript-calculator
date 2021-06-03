@@ -11,7 +11,7 @@ export default class App {
     document
       .querySelector("div.digits.flex")!
       .addEventListener("click", evt =>
-        this.typeNumber(evt.target as HTMLButtonElement)
+        this.typeNumber(evt.target as HTMLButtonElement, equation)
       );
     document
       .querySelector("div.operations.subgrid")!
@@ -20,15 +20,19 @@ export default class App {
       );
   }
   allClear(equation: Equation) {
-    equation.init();
+    equation.initNumbers();
     this.totalDiv.innerText = "0";
   }
-  typeNumber(target: HTMLButtonElement) {
+  typeNumber(target: HTMLButtonElement, equation: Equation) {
     if (target.className !== "digit") {
       return;
     }
     if (isNaN(Number(this.totalDiv.innerText))) {
       this.totalDiv.innerText = "0";
+    }
+    if (equation.getOperation() === "=") {
+      this.totalDiv.innerText = "0";
+      equation.setOperation("");
     }
     if (this.totalDiv.innerText.length < 3) {
       this.totalDiv.insertAdjacentText("beforeend", target.innerText);
@@ -53,15 +57,11 @@ export default class App {
     } else {
       equation.setSecondNum(num);
       let result = this.calculate(equation);
-      // console.log(`result: ${result}`);
       this.totalDiv.innerText =
         result !== null ? String(result) : this.totalDiv.innerText;
     }
   }
   calculate(equation: Equation): number | null {
-    // console.log(
-    //   `firstNum: ${this.firstNum}, secondNum: ${this.secondNum}, operation: ${this.operation}`
-    // );
     let ret: number | null = null;
     if (equation.operation === "+") {
       ret = this.plus(equation);
@@ -72,11 +72,8 @@ export default class App {
     } else if (equation.operation === "/") {
       ret = this.divide(equation);
     }
-    // console.log(`ret: ${ret}`);
-    // console.log(
-    //   `firstNum: ${this.firstNum}, secondNum: ${this.secondNum}, operation: ${this.operation}`
-    // );
-    equation.init();
+    equation.initNumbers();
+    equation.setOperation("=");
     return ret;
   }
   private plus(equation: Equation): number {
