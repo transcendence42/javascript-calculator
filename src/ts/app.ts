@@ -1,5 +1,7 @@
+import Equation from "./equation.js";
+
 export default class App {
   constructor() {
-    alert("App");
+    const equation = new Equation();
   }
 }
