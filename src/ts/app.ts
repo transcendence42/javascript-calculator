@@ -4,6 +4,15 @@ export default class App {
   constructor() {
     const equation = new Equation();
     const totalDiv = document.querySelector("#total") as HTMLDivElement;
+    //click AC
+    document
+      .querySelector("div.modifiers.subgrid")!
+      .addEventListener("click", () => {
+        equation.setFirstNum(0);
+        equation.setSecondNum(0);
+        equation.setOperation("");
+        totalDiv.innerText = "0";
+      });
     //click num
     document
       .querySelector("div.digits.flex")!
