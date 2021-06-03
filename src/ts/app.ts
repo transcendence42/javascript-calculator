@@ -5,28 +5,14 @@ export default class App {
   constructor() {
     const equation = new Equation();
     this.totalDiv = document.querySelector("#total") as HTMLDivElement;
-    //click AC
     document
       .querySelector("div.modifiers.subgrid")!
       .addEventListener("click", () => this.allClear(equation));
-    //click num
     document
       .querySelector("div.digits.flex")!
-      .addEventListener("click", evt => {
-        if ((evt.target as HTMLElement).className !== "digit") {
-          return;
-        }
-        if (isNaN(Number(this.totalDiv.innerText))) {
-          this.totalDiv.innerText = "0";
-        }
-        if (this.totalDiv.innerText.length < 3) {
-          this.totalDiv.insertAdjacentText(
-            "beforeend",
-            (evt.target as HTMLButtonElement).innerText
-          );
-          this.totalDiv.innerText = String(Number(this.totalDiv.innerText));
-        }
-      });
+      .addEventListener("click", evt =>
+        this.typeNumber(evt.target as HTMLButtonElement)
+      );
     //click operation
     document
       .querySelector("div.operations.subgrid")!
@@ -55,6 +41,18 @@ export default class App {
   allClear(equation: Equation) {
     equation.init();
     this.totalDiv.innerText = "0";
+  }
+  typeNumber(target: HTMLButtonElement) {
+    if (target.className !== "digit") {
+      return;
+    }
+    if (isNaN(Number(this.totalDiv.innerText))) {
+      this.totalDiv.innerText = "0";
+    }
+    if (this.totalDiv.innerText.length < 3) {
+      this.totalDiv.insertAdjacentText("beforeend", target.innerText);
+      this.totalDiv.innerText = String(Number(this.totalDiv.innerText));
+    }
   }
   calculate(equation: Equation): number | null {
     // console.log(
