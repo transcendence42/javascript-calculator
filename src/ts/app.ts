@@ -41,12 +41,14 @@ export default class App {
     }
     const operation: string = target.innerText;
     const num = Number(this.totalDiv.innerText);
-    equation.setOperation(operation);
-    if (isNaN(num)) {
+    if (isNaN(num) && operation !== "=") {
+      equation.setOperation(operation);
+      this.totalDiv.innerText = operation;
       return;
     }
     if (operation !== "=") {
       equation.setFirstNum(num);
+      equation.setOperation(operation);
       this.totalDiv.innerText = operation;
     } else {
       equation.setSecondNum(num);
