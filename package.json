@@ -1,0 +1,34 @@
+{
+  "name": "javascript-calculator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwon42/javascript-calculator.git"
+  },
+  "author": "jwon42 <jwon@student.42seoul.kr>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.0"
+  },
+  "scripts": {
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "cypress:run": "./node_modules/.bin/cypress run",
+    "tsc": "tsc",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "cypress": "^7.4.0",
+    "typescript": "^4.3.2"
+  },
+  "description": "<br/> <br/> <p align=\"middle\" >   <img width=\"100px;\" src=\"src/images/calculator_icon.png\"/> </p> <h2 align=\"middle\">level1 - 자바스크립트 계산기</h2> <p align=\"middle\">자바스크립트 계산기로 익혀보는 Cypress</p> <p align=\"middle\">   <img src=\"https://img.shields.io/badge/version-1.0.0-blue?style=flat-square\" alt=\"template version\"/>   <img src=\"https://img.shields.io/badge/language-html-red.svg?style=flat-square\"/>   <img src=\"https://img.shields.io/badge/language-css-blue.svg?style=flat-square\"/>   <img src=\"https://img.shields.io/badge/language-js-yellow.svg?style=flat-square\"/>   <img src=\"https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square\"/> </p>",
+  "bugs": {
+    "url": "https://github.com/jwon42/javascript-calculator/issues"
+  },
+  "homepage": "https://github.com/jwon42/javascript-calculator#readme",
+  "keywords": []
+}

@@ -1,3 +1,9 @@
+- **데모페이지**
+  https://jwon42.github.io/javascript-calculator/
+
+- **PR**
+  https://github.com/transcendence42/javascript-calculator/pull/4
+
 <br/>
 <br/>
 <p align="middle" >
